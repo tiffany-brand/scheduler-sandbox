@@ -102,7 +102,7 @@ function Schedule() {
                 <GroupingPanel />
                 <Toolbar />
                 <ViewSwitcher />
-
+                <DragDropProvider />
             </Scheduler>
         </div>
     )

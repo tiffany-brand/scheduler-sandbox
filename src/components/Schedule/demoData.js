@@ -17,6 +17,8 @@ export const crews = [
 export const equipment = [
     { text: 'Pickup 1', id: 1 },
     { text: 'Pickup 2', id: 2 },
+    { text: "Mow Deck 1", id: 3 },
+    { text: "Hydroseeder 1", id: 4 }
 ];
 
 export const appointments = [
@@ -27,7 +29,7 @@ export const appointments = [
         allDay: true,
         id: 1,
         crewId: 1,
-        equipId: 1,
+        equipId: [1],
     },
     {
         title: 'Sanders Lawn Hydroseed',
@@ -36,7 +38,7 @@ export const appointments = [
         allDay: true,
         id: 2,
         crewId: 2,
-        equipId: 1,
+        equipId: [2, 3, 4],
     },
     {
         title: 'Crichton Lawn Hydroseed',
@@ -45,7 +47,7 @@ export const appointments = [
         allDay: true,
         id: 3,
         crewId: 2,
-        equipId: 1,
+        equipId: [2, 3, 4],
     },
     {
         title: 'Smith Lawn Sod Installation',
@@ -54,7 +56,7 @@ export const appointments = [
         allDay: true,
         id: 4,
         crewId: 2,
-        equipId: 1,
+        equipId: [2, 3, 4],
     },
 
 ]

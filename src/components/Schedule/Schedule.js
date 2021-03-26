@@ -25,6 +25,7 @@ const resources = [{
 }, {
     fieldName: 'equipId',
     title: 'Equipment',
+    allowMultiple: true,
     instances: equipment
 }
 ];

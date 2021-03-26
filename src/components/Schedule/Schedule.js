@@ -4,11 +4,13 @@ import {
     Resources,
     WeekView,
     Appointments,
+    AppointmentForm,
     AppointmentTooltip,
     GroupingPanel,
     AllDayPanel,
     Toolbar,
     ViewSwitcher,
+    ConfirmationDialog,
     DragDropProvider
 } from '@devexpress/dx-react-scheduler-material-ui';
 
@@ -41,6 +43,21 @@ function Schedule() {
     const [data, setData] = useState(appointments);
     console.log(data)
 
+    const commitChanges = ({ added, changed, deleted }) => {
+        if (added) {
+            const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
+            setData([...data, { id: startingAddedId, ...added }]);
+        }
+        if (changed) {
+            setData(data.map(appointment => (
+                changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment)));
+        }
+        if (deleted !== undefined) {
+            setData(data.filter(appointment => appointment.id !== deleted));
+        }
+        return data;
+    };
+
     return (
         <div>
             <p>Test Schedule</p>
@@ -50,7 +67,10 @@ function Schedule() {
                     grouping={grouping}
                     groupOrientation={groupOrientation}
                 />
-
+                <EditingState
+                    onCommitChanges={commitChanges}
+                />
+                <IntegratedEditing />
                 <WeekView
                     startDayHour={9}
                     endDayHour={11}
@@ -64,7 +84,7 @@ function Schedule() {
                     excludedDays={[0, 6]}
                     name="Horizontal Orientation"
                 />
-
+                <ConfirmationDialog />
                 <Appointments />
                 <AllDayPanel />
                 <Resources
@@ -74,8 +94,11 @@ function Schedule() {
 
                 <IntegratedGrouping />
 
-                <AppointmentTooltip />
-
+                <AppointmentTooltip
+                    showOpenButton
+                    showDeleteButton
+                />
+                <AppointmentForm />
                 <GroupingPanel />
                 <Toolbar />
                 <ViewSwitcher />
